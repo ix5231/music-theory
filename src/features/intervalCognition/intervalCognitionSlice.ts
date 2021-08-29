@@ -2,6 +2,7 @@ import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { rootSelector } from 'app/selector';
 
 export type KeyNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+export type Pitch = KeyNumber;
 
 export interface IntervalCognitionState {
   selectedInterval: { from?: KeyNumber, to?: KeyNumber };
@@ -20,6 +21,47 @@ export const selectedIntervalSelector = createSelector(
   stateSelector,
   (state) => state.selectedInterval,
 );
+
+export type Interval = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+
+const calcInterval = (root: Pitch, other: Pitch): Interval => (
+  Math.abs(root - other)
+) as Interval;
+
+interface ChordQuality {
+  name: string,
+  intervals: Interval[],
+}
+
+interface Chord {
+  root: Pitch,
+  quality: ChordQuality
+}
+
+const chordQualities: ChordQuality[] = [
+  {
+    name: 'Major',
+    intervals: [4, 7],
+  },
+];
+
+interface ChordSelection {
+  root: Pitch,
+  others: Pitch[],
+}
+
+const findChord = (sel: ChordSelection): Chord[] => {
+  const intervals = sel.others.map((p) => calcInterval(sel.root, p));
+  return chordQualities
+    .filter((cq) => {
+      if (cq.intervals.length !== intervals.length) return false;
+      return cq.intervals.every((e, i) => e === intervals[i]);
+    })
+    .map((c) => ({
+      root: sel.root,
+      quality: c,
+    }));
+};
 
 const intervalTable = [
   'Perfect Unison',
