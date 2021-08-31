@@ -37,12 +37,20 @@ const chordQualities: ChordIntervals[] = [
   },
 ];
 
-export interface ChordSelection {
+export interface ChordSelectionWithRoot {
+  type: 'withRoot',
   root: Pitch,
   others: Pitch[],
 }
 
-export const findChord = (sel: ChordSelection): Chord[] => {
+export interface ChordSelectionWithoutRoot {
+  type: 'withoutRoot',
+  pitches: Pitch[],
+}
+
+export type ChordSelection = ChordSelectionWithRoot | ChordSelectionWithoutRoot;
+
+const findChordWithRoot = (sel: ChordSelectionWithRoot): Chord[] => {
   const intervals = sel.others.map((p) => calcInterval(sel.root, p));
   return chordQualities
     .filter((cq) => cq.intervals.every((e) => intervals.includes(e)))
@@ -52,3 +60,13 @@ export const findChord = (sel: ChordSelection): Chord[] => {
       tensions: intervals.filter((e) => !c.intervals.includes(e)),
     }));
 };
+
+export const findChord = (sel: ChordSelection): Chord[] => (sel.type === 'withRoot'
+  ? findChordWithRoot(sel)
+  : sel.pitches
+    .map((e) => ({
+      type: 'withRoot',
+      root: e,
+      others: sel.pitches.filter((e2) => e2 !== e),
+    } as ChordSelectionWithRoot))
+    .flatMap(findChordWithRoot));

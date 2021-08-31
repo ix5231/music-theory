@@ -3,6 +3,7 @@ import { findChord, ChordSelection } from 'theory/chord';
 describe('findChord', () => {
   test('C#が見つけられる', () => {
     const sel: ChordSelection = {
+      type: 'withRoot',
       root: 1,
       others: [5, 8],
     };
@@ -15,6 +16,7 @@ describe('findChord', () => {
 
   test('Bが見つけられる', () => {
     const sel: ChordSelection = {
+      type: 'withRoot',
       root: 11,
       others: [3, 6],
     };
@@ -27,6 +29,7 @@ describe('findChord', () => {
 
   test('Dmが見つけられる', () => {
     const sel: ChordSelection = {
+      type: 'withRoot',
       root: 2,
       others: [5, 9],
     };
@@ -39,6 +42,7 @@ describe('findChord', () => {
 
   test('Adimが見つけられる', () => {
     const sel: ChordSelection = {
+      type: 'withRoot',
       root: 9,
       others: [0, 3],
     };
@@ -51,6 +55,7 @@ describe('findChord', () => {
 
   test('Eaugが見つけられる', () => {
     const sel: ChordSelection = {
+      type: 'withRoot',
       root: 4,
       others: [8, 0],
     };
@@ -63,6 +68,7 @@ describe('findChord', () => {
 
   test('C#Maj7が見つけられる', () => {
     const sel: ChordSelection = {
+      type: 'withRoot',
       root: 1,
       others: [5, 8, 0],
     };
@@ -70,6 +76,32 @@ describe('findChord', () => {
       root: 1,
       quality: 'major',
       tensions: [11],
+    }]);
+  });
+
+  test('C#が見つけられる（ルート指定なし）', () => {
+    const sel: ChordSelection = {
+      type: 'withoutRoot',
+      pitches: [1, 5, 8],
+    };
+    expect(findChord(sel)).toEqual([{
+      root: 1,
+      quality: 'major',
+      tensions: [],
+    }]);
+  });
+
+  test('C#/B#が見つけられる', () => {
+    const sel: ChordSelection = {
+      type: 'withRoot',
+      root: 5,
+      others: [1, 8, 0],
+    };
+    expect(findChord(sel)).toEqual([{
+      root: 1,
+      base: 11,
+      quality: 'major',
+      tensions: [],
     }]);
   });
 });
