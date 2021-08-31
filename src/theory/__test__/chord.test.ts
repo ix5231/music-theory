@@ -9,6 +9,7 @@ describe('findChord', () => {
     expect(findChord(sel)).toEqual([{
       root: 1,
       quality: 'major',
+      tensions: [],
     }]);
   });
 
@@ -20,6 +21,7 @@ describe('findChord', () => {
     expect(findChord(sel)).toEqual([{
       root: 11,
       quality: 'major',
+      tensions: [],
     }]);
   });
 
@@ -31,6 +33,7 @@ describe('findChord', () => {
     expect(findChord(sel)).toEqual([{
       root: 2,
       quality: 'minor',
+      tensions: [],
     }]);
   });
 
@@ -42,6 +45,7 @@ describe('findChord', () => {
     expect(findChord(sel)).toEqual([{
       root: 9,
       quality: 'diminished',
+      tensions: [],
     }]);
   });
 
@@ -53,6 +57,19 @@ describe('findChord', () => {
     expect(findChord(sel)).toEqual([{
       root: 4,
       quality: 'augumented',
+      tensions: [],
+    }]);
+  });
+
+  test('C#Maj7が見つけられる', () => {
+    const sel: ChordSelection = {
+      root: 1,
+      others: [5, 8, 0],
+    };
+    expect(findChord(sel)).toEqual([{
+      root: 1,
+      quality: 'major',
+      tensions: [11],
     }]);
   });
 });

@@ -15,6 +15,7 @@ interface ChordIntervals {
 interface Chord {
   root: Pitch,
   quality: ChordQuality
+  tensions: Interval[],
 }
 
 const chordQualities: ChordIntervals[] = [
@@ -44,12 +45,10 @@ export interface ChordSelection {
 export const findChord = (sel: ChordSelection): Chord[] => {
   const intervals = sel.others.map((p) => calcInterval(sel.root, p));
   return chordQualities
-    .filter((cq) => {
-      if (cq.intervals.length !== intervals.length) return false;
-      return cq.intervals.every((e, i) => e === intervals[i]);
-    })
+    .filter((cq) => cq.intervals.every((e) => intervals.includes(e)))
     .map((c) => ({
       root: sel.root,
       quality: c.name,
+      tensions: intervals.filter((e) => !c.intervals.includes(e)),
     }));
 };
