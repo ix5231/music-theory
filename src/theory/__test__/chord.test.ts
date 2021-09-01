@@ -73,7 +73,27 @@ describe('findChord', () => {
         ],
       ),
     );
-    expect(result.length).toBe(3);
+  });
+
+  test('C(omit3)が見つけられる', () => {
+    const sel: ChordSelection = {
+      type: 'withRoot',
+      root: 0,
+      others: [7],
+    };
+    const result = findChord(sel);
+    expect(result).toEqual(
+      expect.arrayContaining(
+        [
+          {
+            root: 0,
+            base: 0,
+            quality: 'omit3',
+            tensions: [],
+          },
+        ],
+      ),
+    );
   });
 });
 

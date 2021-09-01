@@ -7,11 +7,12 @@ const calcInterval = (root: Pitch, other: Pitch): Interval => (
   (((other - root) % 12) + 12) % 12
 ) as Interval;
 
-type ChordQuality = 'major' | 'minor' | 'augumented' | 'diminished';
+type ChordQuality = 'major' | 'minor' | 'augumented' | 'diminished' | 'omit3';
 
 interface ChordIntervals {
   name: ChordQuality,
   intervals: Interval[],
+  forbidden?: Interval[],
 }
 
 interface Chord {
@@ -38,6 +39,11 @@ const chordQualities: ChordIntervals[] = [
     name: 'augumented',
     intervals: [4, 8],
   },
+  {
+    name: 'omit3',
+    intervals: [7],
+    forbidden: [3, 4],
+  },
 ];
 
 export interface ChordSelectionWithRoot {
@@ -53,10 +59,15 @@ export interface ChordSelectionWithoutRoot {
 
 export type ChordSelection = ChordSelectionWithRoot | ChordSelectionWithoutRoot;
 
+const matchChord = (intervals: Interval[]) => (ci: ChordIntervals): boolean => (
+  ci.intervals.every((e) => intervals.includes(e))
+  && !ci.forbidden?.some((e) => intervals.includes(e))
+);
+
 const findChordWithRoot = (sel: ChordSelectionWithRoot): Chord[] => {
   const intervals = sel.others.map((p) => calcInterval(sel.root, p));
   return chordQualities
-    .filter((cq) => cq.intervals.every((e) => intervals.includes(e)))
+    .filter(matchChord(intervals))
     .map((c) => ({
       root: sel.root,
       base: sel.root,
