@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export type Pitch = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 export type Interval = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 
@@ -14,6 +16,7 @@ interface ChordIntervals {
 
 interface Chord {
   root: Pitch,
+  base: Pitch,
   quality: ChordQuality
   tensions: Interval[],
 }
@@ -56,17 +59,38 @@ const findChordWithRoot = (sel: ChordSelectionWithRoot): Chord[] => {
     .filter((cq) => cq.intervals.every((e) => intervals.includes(e)))
     .map((c) => ({
       root: sel.root,
+      base: sel.root,
       quality: c.name,
       tensions: intervals.filter((e) => !c.intervals.includes(e)),
     }));
 };
 
+const findChordWithoutRoot = (sel: ChordSelectionWithoutRoot): Chord[] => sel.pitches
+  .map((e) => ({
+    type: 'withRoot',
+    root: e,
+    others: sel.pitches.filter((e2) => e2 !== e),
+  } as ChordSelectionWithRoot))
+  .flatMap(findChordWithRoot);
+
+const findChordWithBase = (sel: ChordSelectionWithRoot): Chord[] => {
+  const sel1: ChordSelectionWithoutRoot = {
+    type: 'withoutRoot',
+    pitches: [sel.root, ...sel.others],
+  };
+  const sel2: ChordSelectionWithoutRoot = {
+    type: 'withoutRoot',
+    pitches: _.cloneDeep(sel.others),
+  };
+  return [sel1, sel2].flatMap(
+    findChordWithoutRoot,
+  )
+    .map((c) => ({
+      ...c,
+      base: sel.root,
+    }));
+};
+
 export const findChord = (sel: ChordSelection): Chord[] => (sel.type === 'withRoot'
-  ? findChordWithRoot(sel)
-  : sel.pitches
-    .map((e) => ({
-      type: 'withRoot',
-      root: e,
-      others: sel.pitches.filter((e2) => e2 !== e),
-    } as ChordSelectionWithRoot))
-    .flatMap(findChordWithRoot));
+  ? findChordWithBase(sel)
+  : findChordWithoutRoot(sel));
