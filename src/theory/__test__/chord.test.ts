@@ -1,4 +1,6 @@
-import { findChord, ChordSelection } from 'theory/chord';
+import {
+  findChord, ChordSelection, Chord, chordPrettyPrint,
+} from 'theory/chord';
 
 describe('findChord', () => {
   test('C#が見つけられる', () => {
@@ -94,6 +96,35 @@ describe('findChord', () => {
         ],
       ),
     );
+  });
+});
+
+describe('chordPrettyPrint', () => {
+  const testData: [ string, Chord][] = [
+    [
+      'E', {
+        root: 4, base: 4, quality: 'major', tensions: [],
+      },
+    ],
+    [
+      'D♯', {
+        root: 3, base: 3, quality: 'major', tensions: [],
+      },
+    ],
+    [
+      'Cm', {
+        root: 0, base: 0, quality: 'minor', tensions: [],
+      },
+    ],
+    [
+      'Gm', {
+        root: 7, base: 7, quality: 'minor', tensions: [],
+      },
+    ],
+  ];
+
+  test.each(testData)('コード名生成: %s', (name, chord) => {
+    expect(chordPrettyPrint(chord)).toEqual(name);
   });
 });
 

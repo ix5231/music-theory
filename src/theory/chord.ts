@@ -15,7 +15,7 @@ interface ChordIntervals {
   forbidden?: Interval[],
 }
 
-interface Chord {
+export interface Chord {
   root: Pitch,
   base: Pitch,
   quality: ChordQuality
@@ -105,3 +105,26 @@ const findChordWithBase = (sel: ChordSelectionWithRoot): Chord[] => {
 export const findChord = (sel: ChordSelection): Chord[] => (sel.type === 'withRoot'
   ? findChordWithBase(sel)
   : findChordWithoutRoot(sel));
+
+// TODO: deal with name with flat
+const pitchName: Record<Pitch, string> = {
+  0: 'C',
+  1: 'C♯',
+  2: 'D',
+  3: 'D♯',
+  4: 'E',
+  5: 'F',
+  6: 'F',
+  7: 'G',
+  8: 'G♯',
+  9: 'A',
+  10: 'A♯',
+  11: 'B',
+};
+
+export const chordPrettyPrint = (chord: Chord): string => {
+  if (chord.quality === 'minor') {
+    return `${pitchName[chord.base]}m`;
+  }
+  return pitchName[chord.base];
+};
