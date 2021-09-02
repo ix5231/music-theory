@@ -1,0 +1,21 @@
+chords:
+  major:
+    keyInterval: ['M3']
+    # to disambigation from dominant 7th chords
+    forbidden: ['m7']
+    extensions: 
+      - '': 'P5'
+      - '7': 'M7'
+      - '9': 'M9'
+      - '11': 'M11'
+      - '13': 'M13'
+  
+  minor:
+    keyInterval: [3]
+    # to disambigation from Maj(♯9) chords
+    forbidden: [4]
+    extensions:
+      - name: ''
+        extends: [10]
+      - name: '7'
+        extends: [10]
