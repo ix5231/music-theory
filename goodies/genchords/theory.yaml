@@ -1,0 +1,77 @@
+scales:
+  naturalMajor: [P1, M2, M3, P4, P5, M6, M7]
+  naturalMinor: [P1, m2, m3, P4, P5, m6, m7]
+
+chords:
+  major:
+    chords:
+      -
+        strategy: scale
+        from: naturalMajor
+        chordIds: [~, ~, major, major7, major9, major11, major13]
+
+  minor:
+    chords:
+      -
+        strategy: scale
+        from: naturalMinor
+        chordIds: [~, ~, minor, minor7, minor9, minor11, minor13]
+      - 
+        strategy: enum
+        chords:
+          - from: [P1, m3, P5, m6]
+          - id: minor6
+
+  
+  dim:
+    chords:
+      -
+        strategy: enum
+        chords:
+          - from: [P1, m3, d5]
+            id: dim
+          - from: [P1, m3, d5, d7]
+            id: dim7
+  
+  aug:
+    chords:
+      -
+        strategy: enum
+        chords:
+          - from: [P1, M3, a5]
+            id: aug
+          - from: [P1, M3, a5, m7]
+            id: 'aug7'
+          - from: [P1, M3, a5, m7, M9]
+            id: 'aug9'
+  
+  dom:
+    chords:
+      -
+        strategy: scale
+        from: naturalMajor
+        mode: 5
+        chordIds: [~, ~, ~, dom7, dom9, dom11, dom13]
+  
+  other:
+    find: all
+    chords:
+      -
+        strategy: enum
+        chords:
+          - from: [P1, P5]
+            id: omit3
+          - from: [P1, P4, P5]
+            id: sus4
+          - from: [P1, P4, P5, m7]
+            id: sus47
+          - from: [P1, P4, P5, m7, M9]
+            id: sus49
+          - from: [P1, P2, P5]
+            id: sus2
+          - from: [P1, P2, P5, m7]
+            id: sus27
+          - from: [P1, P2, P5, m7, M9]
+            id: sus29
+          - from: [P1, M3, P5, M6]
+            id: sixth
