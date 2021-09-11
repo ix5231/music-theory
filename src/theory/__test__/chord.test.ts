@@ -128,4 +128,44 @@ describe('chordPrettyPrint', () => {
   });
 });
 
+const expects = [
+  [{
+    root: 0,
+    intervals: [4, 7, 11, 6],
+  }, {
+    root: 0,
+    base: 0,
+    baseQuality: 'major',
+    tension: [6, 11],
+  }, {
+    root: 0,
+    base: 0,
+    baseQuality: 'major7',
+    tension: [6],
+  }, {
+    name: 'CMaj7(+11)',
+    intervals: ['R', 'M3', 'P5', 'M7', '+11'],
+  }],
+];
+
+const data = [
+  {
+    id: 'major',
+    intervals: ['R', 'M3', 'P5'],
+    variant: {
+      major7: {
+        intervals: ['M7'],
+      },
+    },
+  },
+  {
+    id: 'major7',
+    intervals: ['R', 'M3', 'P5', 'M7'],
+  },
+  {
+    id: 'major9',
+    intervals: ['R', 'M3', 'P5', 'M7', '9'],
+  },
+];
+
 export { };
