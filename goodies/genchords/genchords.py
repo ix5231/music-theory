@@ -2,8 +2,8 @@ import yaml
 import json
 
 
-with open('intervals.yaml', "r") as theory_file:
-    intervals = yaml.safe_load(theory_file)
+with open('intervals.json', "r") as theory_file:
+    intervals = json.load(theory_file)
 
 
 def intervals_to_bits(i):
