@@ -4,62 +4,27 @@
     "chords": {
       "145": [
         {
-          "id": "major",
-          "intervals": [
-            "P1",
-            "M3",
-            "P5"
-          ]
+          "id": "major"
         }
       ],
       "2193": [
         {
-          "id": "major7",
-          "intervals": [
-            "P1",
-            "M3",
-            "P5",
-            "M7"
-          ]
+          "id": "major7"
         }
       ],
       "2197": [
         {
-          "id": "major9",
-          "intervals": [
-            "P1",
-            "M3",
-            "P5",
-            "M7",
-            "M2"
-          ]
+          "id": "major9"
         }
       ],
       "2229": [
         {
-          "id": "major11",
-          "intervals": [
-            "P1",
-            "M3",
-            "P5",
-            "M7",
-            "M2",
-            "P4"
-          ]
+          "id": "major11"
         }
       ],
       "2741": [
         {
-          "id": "major13",
-          "intervals": [
-            "P1",
-            "M3",
-            "P5",
-            "M7",
-            "M2",
-            "P4",
-            "M6"
-          ]
+          "id": "major13"
         }
       ]
     }
@@ -67,15 +32,34 @@
   "minor": {
     "find": "last",
     "chords": {
+      "137": [
+        {
+          "id": "minor"
+        }
+      ],
+      "1161": [
+        {
+          "id": "minor7"
+        }
+      ],
+      "1163": [
+        {
+          "id": "minor9"
+        }
+      ],
+      "1195": [
+        {
+          "id": "minor11"
+        }
+      ],
+      "1451": [
+        {
+          "id": "minor13"
+        }
+      ],
       "393": [
         {
-          "id": "minor6",
-          "intervals": [
-            "P1",
-            "m3",
-            "P5",
-            "m6"
-          ]
+          "id": "minor6"
         }
       ]
     }
@@ -85,23 +69,12 @@
     "chords": {
       "73": [
         {
-          "id": "dim",
-          "intervals": [
-            "P1",
-            "m3",
-            "d5"
-          ]
+          "id": "dim"
         }
       ],
       "585": [
         {
-          "id": "dim7",
-          "intervals": [
-            "P1",
-            "m3",
-            "d5",
-            "d7"
-          ]
+          "id": "dim7"
         }
       ]
     }
@@ -111,35 +84,17 @@
     "chords": {
       "273": [
         {
-          "id": "aug",
-          "intervals": [
-            "P1",
-            "M3",
-            "a5"
-          ]
+          "id": "aug"
         }
       ],
       "1297": [
         {
-          "id": "aug7",
-          "intervals": [
-            "P1",
-            "M3",
-            "a5",
-            "m7"
-          ]
+          "id": "aug7"
         }
       ],
       "1301": [
         {
-          "id": "aug9",
-          "intervals": [
-            "P1",
-            "M3",
-            "a5",
-            "m7",
-            "M9"
-          ]
+          "id": "aug9"
         }
       ]
     }
@@ -149,52 +104,22 @@
     "chords": {
       "1169": [
         {
-          "id": "dom7",
-          "intervals": [
-            "P1",
-            "M3",
-            "P5",
-            "m7"
-          ]
+          "id": "dom7"
         }
       ],
       "1173": [
         {
-          "id": "dom9",
-          "intervals": [
-            "P1",
-            "M3",
-            "P5",
-            "m7",
-            "M2"
-          ]
+          "id": "dom9"
         }
       ],
       "1205": [
         {
-          "id": "dom11",
-          "intervals": [
-            "P1",
-            "M3",
-            "P5",
-            "m7",
-            "M2",
-            "P4"
-          ]
+          "id": "dom11"
         }
       ],
       "1717": [
         {
-          "id": "dom13",
-          "intervals": [
-            "P1",
-            "M3",
-            "P5",
-            "m7",
-            "M2",
-            "P4",
-            "M6"
-          ]
+          "id": "dom13"
         }
       ]
     }
@@ -204,76 +129,37 @@
     "chords": {
       "129": [
         {
-          "id": "omit3",
-          "intervals": [
-            "P1",
-            "P5"
-          ]
+          "id": "omit3"
         }
       ],
       "161": [
         {
-          "id": "sus4",
-          "intervals": [
-            "P1",
-            "P4",
-            "P5"
-          ]
+          "id": "sus4"
         }
       ],
       "1185": [
         {
-          "id": "sus47",
-          "intervals": [
-            "P1",
-            "P4",
-            "P5",
-            "m7"
-          ]
+          "id": "sus47"
         }
       ],
       "1189": [
         {
-          "id": "sus49",
-          "intervals": [
-            "P1",
-            "P4",
-            "P5",
-            "m7",
-            "M9"
-          ]
+          "id": "sus49"
         }
       ],
       "133": [
         {
-          "id": "sus2",
-          "intervals": [
-            "P1",
-            "M2",
-            "P5"
-          ]
+          "id": "sus2"
         }
       ],
       "1157": [
         {
-          "id": "sus27",
-          "intervals": [
-            "P1",
-            "M2",
-            "P5",
-            "m7"
-          ]
+          "id": "sus27"
         }
       ],
       "657": [
         {
-          "id": "sixth",
-          "intervals": [
-            "P1",
-            "M3",
-            "P5",
-            "M6"
-          ]
+          "id": "sixth"
         }
       ]
     }

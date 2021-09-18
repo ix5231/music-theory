@@ -1,15 +1,15 @@
 import {
-  findChord, ChordSelection, Chord
+  findChord, ChordSelection, Chord,
 } from 'theory/chord';
 
 describe('findChord', () => {
-  const withRoot: {select: ChordSelection, find: Chord}[] = [
+  const withRoot: { select: ChordSelection, find: Chord }[] = [
     {
       // E
       select: {
         type: 'withRoot',
         base: 4,
-        others: [8, 11]
+        others: [8, 11],
       },
       find: {
         base: 4,
@@ -21,18 +21,18 @@ describe('findChord', () => {
       select: {
         type: 'withRoot',
         base: 5,
-        others: [8, 0]
+        others: [8, 0],
       },
       find: {
         base: 5,
-        id: 'major',
+        id: 'minor',
       },
-    }
-  ]
+    },
+  ];
 
-  test.each(withRoot)('Chord recognize (w/root) test #%#', ({select, find}) => {
-    expect(findChord(select)).toEqual(expect.arrayContaining([find]))
-  })
-})
+  test.each(withRoot)('Chord recognize (w/root) test #%#', ({ select, find }) => {
+    expect(findChord(select)).toEqual(expect.arrayContaining([find]));
+  });
+});
 
 export { };

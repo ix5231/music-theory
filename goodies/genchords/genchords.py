@@ -26,7 +26,7 @@ def gen_chords_scale(chord, scales):
         bit = intervals_to_bits(c)
         new_chord = {
             "id": v,
-            "intervals": c
+            # "intervals": c
         }
         if res.get(bit) != None:
             res[bit].append(new_chord)
@@ -41,7 +41,7 @@ def gen_chords_enum(chords):
     for c in chords:
         new_chord = {
             "id": c["id"],
-            "intervals": c["from"]
+            # "intervals": c["from"]
         }
         bit = intervals_to_bits(c["from"])
         if res.get(bit) != None:
@@ -53,11 +53,12 @@ def gen_chords_enum(chords):
 
 def run_strategies(c, scales):
     generate_strategies = c["chords"]
+    res = {}
     for gs in generate_strategies:
         if gs["strategy"] == "scale":
-            res = gen_chords_scale(gs, scales)
+            res = res | gen_chords_scale(gs, scales)
         elif gs["strategy"] == "enum":
-            res = gen_chords_enum(gs["chords"])
+            res = res | gen_chords_enum(gs["chords"])
 
     return {
         "find": c.get("find") or "last",
