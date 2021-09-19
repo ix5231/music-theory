@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'react';
+import 'twin.macro';
 
 interface TabContextType {
   value: number;
@@ -24,7 +25,9 @@ interface TabListProps {
   children: React.ReactNode;
 }
 
-export const TabList = ({ children }: TabListProps): JSX.Element => <div role="tablist">{children}</div>;
+export const TabList = ({ children }: TabListProps): JSX.Element => (
+  <div tw="flex flex-row" role="tablist">{children}</div>
+);
 
 interface TabProps {
   label: string;
