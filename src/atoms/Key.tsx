@@ -12,9 +12,11 @@ const markerStyle = {
   pink: tw`border-pink-600 scale-x-100`,
 };
 
+export type Marker = keyof typeof markerStyle;
+
 interface Props {
   color: keyof typeof keyColorStyle,
-  marker?: keyof typeof markerStyle,
+  marker?: Marker,
   className?: string,
   onClick?: () => void,
 }
