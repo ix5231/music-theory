@@ -2,7 +2,7 @@ import { ComponentProps, useCallback } from 'react';
 import {
   intervalSelector, KeyNumber, pressKey, selectedIntervalSelector,
 } from 'features/intervalCognition';
-import Keyboard from 'molecules/Keyboard';
+import { Keyboard } from 'molecules/Keyboard';
 import { useDispatch, useSelector } from 'react-redux';
 
 type MarkersType = ComponentProps<typeof Keyboard>['markers'];
