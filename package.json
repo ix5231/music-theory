@@ -59,6 +59,7 @@
       "plugin:@typescript-eslint/recommended-requiring-type-checking"
     ],
     "rules": {
+      "import/prefer-default-export": "off",
       "linebreak-style": [
         "error",
         "unix"

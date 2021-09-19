@@ -39,7 +39,7 @@ Key.defaultProps = {
 
 const Spacer = memo(tw.span`mx-1.5 my-0.5`);
 
-const Keyboard = (props :Props): JSX.Element => (
+export const Keyboard = (props :Props): JSX.Element => (
   /* eslint-disable react/jsx-props-no-spreading */
   <div aria-label="Keyboard">
     <Spacer />
@@ -65,5 +65,3 @@ const Keyboard = (props :Props): JSX.Element => (
 Keyboard.defaultProps = {
   markers: {},
 };
-
-export default Keyboard;

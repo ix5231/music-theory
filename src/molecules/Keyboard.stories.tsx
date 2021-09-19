@@ -1,6 +1,6 @@
 import { ComponentProps } from 'react';
 import { Story, Meta } from '@storybook/react';
-import Keyboard from './Keyboard';
+import { Keyboard } from './Keyboard';
 
 export default {
   component: Keyboard,
