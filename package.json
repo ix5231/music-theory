@@ -65,7 +65,13 @@
         "unix"
       ],
       "react/react-in-jsx-scope": "off",
-      "react/require-default-props": "off"
+      "react/require-default-props": "off",
+      "no-plusplus": [
+        "error",
+        {
+          "allowForLoopAfterthoughts": true
+        }
+      ]
     },
     "parserOptions": {
       "project": "./tsconfig.json"

@@ -2,7 +2,7 @@ import { ComponentProps, memo, useCallback } from 'react';
 import tw from 'twin.macro';
 import NormalKey, { Marker } from '../atoms/Key';
 
-type KeyNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+export type KeyNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 export type Markers = Partial<Record<KeyNumber, Marker>>;
 
 interface Props {
