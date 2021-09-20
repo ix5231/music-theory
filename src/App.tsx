@@ -1,5 +1,5 @@
-import Key from './atoms/Key';
+import { Home } from 'pages';
 
-const App = (): JSX.Element => <Key color="black" />;
+const App = (): JSX.Element => <Home />;
 
 export default App;
