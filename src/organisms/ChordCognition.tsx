@@ -11,14 +11,6 @@ interface ExtendedMarkers {
   [keynum: number]: Marker;
 }
 
-const toExtendedMarkers = (base: number, other: number[]): ExtendedMarkers => (
-  {
-    [base]: 'pink',
-    ...other
-      .reduce<ExtendedMarkers>((acc, o) => ({ ...acc, [o]: 'blue' }), {}),
-  }
-);
-
 const splitMarkers = (em: ExtendedMarkers): Record<number, Markers> => (
   Object.entries(em)
     .reduce<Record<number, Markers>>((acc, [k, v]) => (
@@ -30,42 +22,50 @@ const splitMarkers = (em: ExtendedMarkers): Record<number, Markers> => (
   {})
 );
 
-const toMarkers = (base: number, other: number[], octave: number): Markers[] => {
-  const markers = splitMarkers(toExtendedMarkers(base, other));
-  const res = [];
-  for (let i = 0; i < octave; i++) {
-    res.push(markers[i] ?? {});
-  }
+interface Props {
+  octaves: number,
+  markers?: ExtendedMarkers;
+  onPress: (keynum: number) => void;
+}
 
-  return res;
-};
-
-const Keyboards = () => {
-  const dispatch = useDispatch();
-
-  const { root, other } = useSelector(stateSelector).selectedChord;
-  const markers = root !== undefined ? toMarkers(root, other, 2) : undefined;
+const Keyboards = ({ octaves, markers, onPress }:Props) => {
+  const markerss = markers && splitMarkers(markers);
 
   return (
     <>
-      <Keyboard onClick={(k) => { dispatch(pressKey(k)); }} markers={markers && markers[0]} />
-      <Keyboard
-        onClick={(k) => { dispatch(pressKey(k + 12)); }}
-        markers={markers && markers[1]}
-      />
+      {_.range(octaves).map((n) => (
+        <Keyboard
+          key={n}
+          onClick={(k) => { onPress(k + 12 * n); }}
+          markers={markerss && markerss[n]}
+        />
+      ))}
     </>
   );
 };
+
+const makeMarkers = (base: number, other: number[]): ExtendedMarkers => (
+  {
+    [base]: 'pink',
+    ...other
+      .reduce<ExtendedMarkers>((acc, o) => ({ ...acc, [o]: 'blue' }), {}),
+  }
+);
 
 export const ChordCognition = (): JSX.Element => {
   const dispatch = useDispatch();
 
   const chords = useSelector(detectedChordSelector);
+  const { root, other } = useSelector(stateSelector).selectedChord;
 
   return (
     <div>
       <div tw="flex flex-row">
-        <Keyboards />
+        <Keyboards
+          octaves={2}
+          markers={root !== undefined ? makeMarkers(root, other) : undefined}
+          onPress={(k) => dispatch(pressKey(k))}
+        />
       </div>
       <button
         type="button"
