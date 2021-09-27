@@ -1,10 +1,11 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { rootSelector } from 'app/selector';
+import { PitchNumber } from 'theory';
 
-export type KeyNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+export type { PitchNumber };
 
 export interface IntervalCognitionState {
-  selectedInterval: { from?: KeyNumber, to?: KeyNumber };
+  selectedInterval: { from?: PitchNumber, to?: PitchNumber };
 }
 
 export const initialState: IntervalCognitionState = {
@@ -63,7 +64,7 @@ const intervalCognitionSlice = createSlice({
   name: 'intervalCognition',
   initialState,
   reducers: {
-    pressKey(state, action: PayloadAction<KeyNumber>) {
+    pressKey(state, action: PayloadAction<PitchNumber>) {
       if (state.selectedInterval.from === undefined) {
         state.selectedInterval.from = action.payload;
       } else if (state.selectedInterval.to === undefined) {

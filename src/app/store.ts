@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import intervalCognition from 'features/intervalCognition';
+import chordCognition from 'features/chordCognition';
 
 export const store = configureStore({
   reducer: {
     intervalCognition,
+    chordCognition,
   },
 });
 

@@ -1,12 +1,12 @@
 import { ComponentProps, useCallback } from 'react';
 import {
-  intervalSelector, KeyNumber, pressKey, selectedIntervalSelector,
+  intervalSelector, PitchNumber, pressKey, selectedIntervalSelector,
 } from 'features/intervalCognition';
 import { Keyboard } from 'molecules/Keyboard';
 import { useDispatch, useSelector } from 'react-redux';
 
 type MarkersType = ComponentProps<typeof Keyboard>['markers'];
-const createMarkersProp = (from?: KeyNumber, to?: KeyNumber): MarkersType => {
+const createMarkersProp = (from?: PitchNumber, to?: PitchNumber): MarkersType => {
   const r: MarkersType = {
     0: 'default',
     1: 'default',
@@ -35,7 +35,7 @@ const IntervalCognition = (): JSX.Element => {
   const recognizedInterval = useSelector(intervalSelector);
   const { from, to } = useSelector(selectedIntervalSelector);
 
-  const onClick = useCallback((k: KeyNumber) => dispatch(pressKey(k)), [dispatch]);
+  const onClick = useCallback((k: PitchNumber) => dispatch(pressKey(k)), [dispatch]);
 
   return (
     <div>

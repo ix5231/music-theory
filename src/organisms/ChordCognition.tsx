@@ -1,9 +1,10 @@
 import { Marker } from 'atoms/Key';
 import _ from 'lodash';
-import { Keyboard, KeyNumber, Markers } from 'molecules';
-import { useState } from 'react';
-import { findChord } from 'theory';
-import { pitchName } from 'theory/pitch';
+import { Keyboard, Markers } from 'molecules';
+import {
+  stateSelector, reset, pressKey, detectedChordSelector,
+} from 'features/chordCognition';
+import { useDispatch, useSelector } from 'react-redux';
 import 'twin.macro';
 
 interface ExtendedMarkers {
@@ -39,44 +40,42 @@ const toMarkers = (base: number, other: number[], octave: number): Markers[] => 
   return res;
 };
 
+const Keyboards = () => {
+  const dispatch = useDispatch();
+
+  const { root, other } = useSelector(stateSelector).selectedChord;
+  const markers = root !== undefined ? toMarkers(root, other, 2) : undefined;
+
+  return (
+    <>
+      <Keyboard onClick={(k) => { dispatch(pressKey(k)); }} markers={markers && markers[0]} />
+      <Keyboard
+        onClick={(k) => { dispatch(pressKey(k + 12)); }}
+        markers={markers && markers[1]}
+      />
+    </>
+  );
+};
+
 export const ChordCognition = (): JSX.Element => {
-  const [base, setBase] = useState<number | undefined>(undefined);
-  const [other, setOther] = useState<number[]>([]);
-  const markers = base !== undefined ? toMarkers(base, other, 2) : undefined;
+  const dispatch = useDispatch();
 
-  const baseNum: KeyNumber | undefined = base && ((base % 12) as KeyNumber);
-  const otherNum: KeyNumber[] = other.map((e) => e % 12) as KeyNumber[];
-
-  const set = (k: number) => {
-    if (base === undefined) {
-      setBase(k);
-    } else {
-      setOther([...other, k]);
-    }
-  };
+  const chords = useSelector(detectedChordSelector);
 
   return (
     <div>
       <div tw="flex flex-row">
-        <Keyboard onClick={(k) => { set(k); }} markers={markers && markers[0]} />
-        <Keyboard onClick={(k) => { set(k + 12); }} markers={markers && markers[1]} />
+        <Keyboards />
       </div>
       <button
         type="button"
-        onClick={() => {
-          setBase(undefined);
-          setOther([]);
-        }}
+        onClick={() => dispatch(reset())}
       >
         Reset
       </button>
       <div>Detected Chord</div>
       <div>
-        {baseNum !== undefined && findChord({
-          type: 'withRoot',
-          base: baseNum,
-          others: otherNum,
-        }).map((c) => pitchName[c.base] + c.id)}
+        {chords}
       </div>
     </div>
   );
